@@ -1,0 +1,32 @@
+TimerTask:
+  - enable: false
+    description: 示例-描述字段
+    interval: 5s
+    command:
+      - "sh /opt/cmd/aa.sh"
+ProcGuard:
+  - enable: true
+    startupDelay: 3
+    description: 示例-描述字段
+    interval: 5s
+    command:
+      - "sh /opt/cmd/bb.sh"
+    check:
+      execPath: /bin/doa
+      includeCmd:
+        - "111"
+        - "222"
+      excludeCmd:
+        - "333"
+        - "444"
+
+  - enable: true
+    startupDelay: 3
+    description: mongodb
+    interval: 5s
+    command:
+      - "/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/mongodb.conf"
+    check:
+      execPath: /usr/local/mongodb/bin/mongod
+      includeCmd:
+        - "mongodb.conf"

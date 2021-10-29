@@ -1,0 +1,13 @@
+<log4z>
+    <logger name="Common">
+        <appender>CommonAppender</appender>
+    </logger>
+    <appender name="CommonAppender">
+        <levelDefine size="50" min="debug" max="info" line="false" encoder="console" console="true" maxDay="15" maxBackup="20">
+            <path>/var/log/procGuard/info.log</path>
+        </levelDefine>
+        <levelDefine size="50" min="warn" max="fatal" line="false" encoder="console" console="true" maxDay="15" maxBackup="20">
+            <path>/var/log/procGuard/error.log</path>
+        </levelDefine>
+    </appender>
+</log4z>
