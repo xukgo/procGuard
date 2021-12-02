@@ -109,5 +109,6 @@ func (this *ProcGuardConfig) CheckAndDo(procInfos []*psutil.ProcCmdInfo) {
 			logUtil.Common().Info("服务守护执行成功", zap.Error(err), zap.String("description", this.Description),
 				zap.String("cmd", cmd), zap.String("stdout", outStr))
 		}
+		time.Sleep(time.Millisecond*30)
 	}
 }

@@ -153,13 +153,16 @@ func startTimers(conf *core.ProjectConfig) {
 	procRepo.Refresh()
 	guards := conf.ProcGuards
 	count := 0
-	for _, guard := range guards {
+	for idx, guard := range guards {
 		if !guard.Enable {
 			continue
 		}
 		logUtil.Common().Info(guard.ToDescription())
 		logUtil.Common().Info("启用服务守护", zap.String("description", guard.Description))
-		execTimer.AddCronExec(time.Second,uuid.NewV1().String(),guard, guardJob)
+		uid := uuid.NewV1().String()
+		fmt.Println(uid)
+		time.Sleep(time.Millisecond*10)
+		execTimer.AddCronExec(time.Second,uid,guards[idx], guardJob)
 		count++
 	}
 	if count > 0{
@@ -179,7 +182,7 @@ func guardJob(k interface{}, v interface{}) {
 	}
 
 	guard := v.(*core.ProcGuardConfig)
-	guard.CheckAndDo(procInfos)
+	go guard.CheckAndDo(procInfos)
 }
 
 //func holdAllEnable(execArr []*core.ProcGuardConfig) {
